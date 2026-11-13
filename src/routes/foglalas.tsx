@@ -37,7 +37,7 @@ const toKey = (d: Date) => format(d, "yyyy-MM-dd");
 function BookingPage() {
   const book = useServerFn(createBooking);
   const queryClient = useQueryClient();
-  const [service, setService] = useState<string>("teljes-felujitas");
+  const [service, setService] = useState<string>("bura-felujitas");
   const [day, setDay] = useState<Date | undefined>();
   const [time, setTime] = useState<string | undefined>();
   const [sending, setSending] = useState(false);
