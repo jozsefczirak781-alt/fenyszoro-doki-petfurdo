@@ -7,9 +7,9 @@ import { PRICE_LIST, formatHuf } from "@/lib/services";
 export const Route = createFileRoute("/arlista")({
   head: () => ({
     meta: [
-      { title: "Árlista – Tisztafény fényszóró-felújítás" },
-      { name: "description", content: "Fényszóró polírozás, teljes felújítás, párásodás megszüntetése és további szolgáltatások árai." },
-      { property: "og:title", content: "Árlista – Tisztafény fényszóró-felújítás" },
+      { title: "Árlista – Fényszóró Doki Pétfürdő" },
+      { name: "description", content: "Fényszóró búra felújítás gőzölős technológiával, kerámia védőbevonat és ózongenerátoros utastér-fertőtlenítés árai." },
+      { property: "og:title", content: "Árlista – Fényszóró Doki Pétfürdő" },
       { property: "og:description", content: "Átlátható árak fényszóró-felújításra és javításra." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -4,13 +4,10 @@
 export const WORKSHOP_TIME_ZONE = "Europe/Budapest";
 export const BOOKING_WINDOW_DAYS = 60;
 
-const WEEKDAY_SLOTS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
-const SATURDAY_SLOTS = ["08:00", "09:00", "10:00", "11:00"];
+const DAILY_SLOTS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
 
 export const OPENING_HOURS = [
-  { days: "Hétfő – Péntek", hours: "8:00 – 17:00" },
-  { days: "Szombat", hours: "8:00 – 12:00" },
-  { days: "Vasárnap", hours: "Zárva" },
+  { days: "Hétfő – Vasárnap", hours: "8:00 – 17:00" },
 ];
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -42,10 +39,7 @@ export function todayAtWorkshop(now: Date = new Date()): string {
 /** Bookable start times for a date (ignores whether they are already taken). */
 export function slotsForDate(date: string): string[] {
   if (!DATE_RE.test(date)) return [];
-  const weekday = parse(date).getUTCDay();
-  if (weekday === 0) return [];
-  if (weekday === 6) return SATURDAY_SLOTS;
-  return WEEKDAY_SLOTS;
+  return DAILY_SLOTS;
 }
 
 /** Earliest bookable day is tomorrow; latest is BOOKING_WINDOW_DAYS ahead. */

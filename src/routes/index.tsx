@@ -8,12 +8,12 @@ import { OPENING_HOURS } from "@/lib/schedule";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Tisztafény – Újra tiszta fényszórók" },
+      { title: "Fényszóró Doki Pétfürdő – Újra tiszta fényszórók" },
       {
         name: "description",
         content: "Sárgult, matt vagy párás fényszóró? Kérj árajánlatot egy fotóval, nézd meg az árlistát, és foglalj időpontot.",
       },
-      { property: "og:title", content: "Tisztafény – Újra tiszta fényszórók" },
+      { property: "og:title", content: "Fényszóró Doki Pétfürdő – Újra tiszta fényszórók" },
       {
         property: "og:description",
         content: "Fényszóró-felújítás: árajánlat fotó alapján, átlátható árak, online időpontfoglalás.",
@@ -50,7 +50,7 @@ function Index() {
         <div className="absolute inset-0 bg-fade" />
         <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 pt-5">
           <span className="font-display text-xl font-extrabold uppercase tracking-wider">
-            Tiszta<span className="text-primary">fény</span>
+            Fényszóró <span className="text-primary">Doki</span> Pétfürdő
           </span>
           <span className="rounded-full border border-border bg-background/50 px-3 py-1 text-[11px] font-semibold backdrop-blur">
             Fényszóró-műhely
@@ -116,7 +116,7 @@ function Index() {
         <div className="mt-3 grid grid-cols-3 gap-2 text-center">
           {[
             { icon: Timer, label: "1–3 óra" },
-            { icon: ShieldCheck, label: "UV-védelem" },
+            { icon: ShieldCheck, label: "Kerámia védelem" },
             { icon: Sparkles, label: "Gyári tisztaság" },
           ].map(({ icon: Icon, label }) => (
             <div key={label} className="rounded-xl bg-secondary py-3">
