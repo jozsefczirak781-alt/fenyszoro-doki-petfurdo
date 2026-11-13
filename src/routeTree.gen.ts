@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArajanlatRouteImport } from './routes/arajanlat'
+import { Route as ArlistaRouteImport } from './routes/arlista'
+import { Route as FoglalasRouteImport } from './routes/foglalas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArajanlatRoute = ArajanlatRouteImport.update({
+  id: '/arajanlat',
+  path: '/arajanlat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArlistaRoute = ArlistaRouteImport.update({
+  id: '/arlista',
+  path: '/arlista',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoglalasRoute = FoglalasRouteImport.update({
+  id: '/foglalas',
+  path: '/foglalas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/arajanlat': typeof ArajanlatRoute
+  '/arlista': typeof ArlistaRoute
+  '/foglalas': typeof FoglalasRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arajanlat': typeof ArajanlatRoute
+  '/arlista': typeof ArlistaRoute
+  '/foglalas': typeof FoglalasRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/arajanlat': typeof ArajanlatRoute
+  '/arlista': typeof ArlistaRoute
+  '/foglalas': typeof FoglalasRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/arajanlat' | '/arlista' | '/foglalas'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/arajanlat' | '/arlista' | '/foglalas'
+  id: '__root__' | '/' | '/arajanlat' | '/arlista' | '/foglalas'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArajanlatRoute: typeof ArajanlatRoute
+  ArlistaRoute: typeof ArlistaRoute
+  FoglalasRoute: typeof FoglalasRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/arajanlat': {
+      id: '/arajanlat'
+      path: '/arajanlat'
+      fullPath: '/arajanlat'
+      preLoaderRoute: typeof ArajanlatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arlista': {
+      id: '/arlista'
+      path: '/arlista'
+      fullPath: '/arlista'
+      preLoaderRoute: typeof ArlistaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/foglalas': {
+      id: '/foglalas'
+      path: '/foglalas'
+      fullPath: '/foglalas'
+      preLoaderRoute: typeof FoglalasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArajanlatRoute: ArajanlatRoute,
+  ArlistaRoute: ArlistaRoute,
+  FoglalasRoute: FoglalasRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
