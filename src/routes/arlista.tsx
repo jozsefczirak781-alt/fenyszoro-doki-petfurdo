@@ -8,7 +8,7 @@ export const Route = createFileRoute("/arlista")({
   head: () => ({
     meta: [
       { title: "Árlista – Fényszóró Doki Pétfürdő" },
-      { name: "description", content: "Fényszóró polírozás, teljes felújítás, párásodás megszüntetése és további szolgáltatások árai." },
+      { name: "description", content: "Fényszóró búra felújítás gőzölős technológiával, kerámia védőbevonat és ózongenerátoros utastér-fertőtlenítés árai." },
       { property: "og:title", content: "Árlista – Fényszóró Doki Pétfürdő" },
       { property: "og:description", content: "Átlátható árak fényszóró-felújításra és javításra." },
       { property: "og:type", content: "website" },
