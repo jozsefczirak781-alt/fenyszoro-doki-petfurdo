@@ -59,7 +59,10 @@ function BookingPage() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!dateKey || !time) return toast.error("Válassz napot és időpontot.");
+    if (!dateKey || !time) {
+      toast.error("Válassz napot és időpontot.");
+      return;
+    }
     const f = new FormData(e.currentTarget);
     setSending(true);
     try {

@@ -51,7 +51,8 @@ function QuotePage() {
 
   function removePhoto(i: number) {
     setPhotos((prev) => {
-      URL.revokeObjectURL(prev[i].url);
+      const removed = prev[i];
+      if (removed) URL.revokeObjectURL(removed.url);
       return prev.filter((_, idx) => idx !== i);
     });
   }
@@ -62,8 +63,14 @@ function QuotePage() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (photos.length === 0) return toast.error("Tölts fel legalább egy fotót a fényszóróról.");
-    if (problems.length === 0) return toast.error("Jelöld meg, mi a probléma a fényszóróval.");
+    if (photos.length === 0) {
+      toast.error("Tölts fel legalább egy fotót a fényszóróról.");
+      return;
+    }
+    if (problems.length === 0) {
+      toast.error("Jelöld meg, mi a probléma a fényszóróval.");
+      return;
+    }
     const form = new FormData(e.currentTarget);
     const fd = new FormData();
     for (const k of ["name", "phone", "email", "car", "message"]) fd.set(k, String(form.get(k) ?? ""));
@@ -73,7 +80,10 @@ function QuotePage() {
       const shrunk = await Promise.all(photos.map((p) => shrinkImage(p.file)));
       shrunk.forEach((f) => fd.append("photos", f));
       const res = await send({ data: fd });
-      if (!res.ok) return void toast.error(res.error);
+      if (!res.ok) {
+        toast.error(res.error);
+        return;
+      }
       setDone(true);
       window.scrollTo({ top: 0 });
     } catch (err) {
