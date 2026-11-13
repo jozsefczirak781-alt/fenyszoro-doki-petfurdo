@@ -116,7 +116,7 @@ function Index() {
         <div className="mt-3 grid grid-cols-3 gap-2 text-center">
           {[
             { icon: Timer, label: "1–3 óra" },
-            { icon: ShieldCheck, label: "UV-védelem" },
+            { icon: ShieldCheck, label: "Kerámia védelem" },
             { icon: Sparkles, label: "Gyári tisztaság" },
           ].map(({ icon: Icon, label }) => (
             <div key={label} className="rounded-xl bg-secondary py-3">
