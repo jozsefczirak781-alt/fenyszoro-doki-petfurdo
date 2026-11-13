@@ -130,17 +130,3 @@ export const createBooking = createServerFn({ method: "POST" })
     }
     return { ok: true };
   });
-
-export const getBookedTimes = createServerFn({ method: "GET" })
-  .inputValidator((data: { date: string }) =>
-    z.object({ date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) }).parse(data),
-  )
-  .handler(async ({ data }): Promise<string[]> => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: rows, error } = await supabaseAdmin.rpc("get_booked_times", { _date: data.date });
-    if (error) {
-      console.error("booked times failed", error);
-      return [];
-    }
-    return (rows ?? []) as string[];
-  });
