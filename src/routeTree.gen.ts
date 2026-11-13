@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArajanlatRouteImport } from './routes/arajanlat'
 import { Route as ArlistaRouteImport } from './routes/arlista'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArajanlatRoute = ArajanlatRouteImport.update({
+  id: '/arajanlat',
+  path: '/arajanlat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArlistaRoute = ArlistaRouteImport.update({
@@ -25,27 +31,31 @@ const ArlistaRoute = ArlistaRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/arajanlat': typeof ArajanlatRoute
   '/arlista': typeof ArlistaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arajanlat': typeof ArajanlatRoute
   '/arlista': typeof ArlistaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/arajanlat': typeof ArajanlatRoute
   '/arlista': typeof ArlistaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/arlista'
+  fullPaths: '/' | '/arajanlat' | '/arlista'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/arlista'
-  id: '__root__' | '/' | '/arlista'
+  to: '/' | '/arajanlat' | '/arlista'
+  id: '__root__' | '/' | '/arajanlat' | '/arlista'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArajanlatRoute: typeof ArajanlatRoute
   ArlistaRoute: typeof ArlistaRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arajanlat': {
+      id: '/arajanlat'
+      path: '/arajanlat'
+      fullPath: '/arajanlat'
+      preLoaderRoute: typeof ArajanlatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/arlista': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArajanlatRoute: ArajanlatRoute,
   ArlistaRoute: ArlistaRoute,
 }
 export const routeTree = rootRouteImport
