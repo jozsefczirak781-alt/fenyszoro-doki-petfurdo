@@ -87,7 +87,7 @@ export const PRICE_LIST: PriceCategory[] = [
       {
         id: "beallitas",
         name: "Fényszóró beállítás",
-        description: "Fénykép-beállítás műszeresen, a műszaki vizsga előírásai szerint.",
+        description: "Műszeres beállítás a műszaki vizsga előírásai szerint.",
         price: 4990,
         unit: "alkalom",
       },
