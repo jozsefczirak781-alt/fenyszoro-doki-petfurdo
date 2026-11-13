@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Mobile-app shell: `__root.tsx` wraps every page in a `max-w-md` column with a fixed bottom tab bar (`src/components/app/BottomNav.tsx`); new top-level pages need a tab or a link from an existing page. Why: the product is used as a phone app.
+- Price list and services live in `src/lib/services.ts`; opening hours and bookable slots live in `src/lib/schedule.ts` (dates as `YYYY-MM-DD` in Europe/Budapest), covered by `schedule.test.ts`. Why: booking page, price page and server validation must share one source.
+- Quote requests and bookings are written only by server functions in `src/lib/workshop.functions.ts` using the admin client; the tables have RLS on with no public policies, and photos go to the private `quote-photos` bucket. Why: visitors must never read other customers' data.
+- Taken booking times are read through the `get_booked_times(date)` database function, which exposes times only. A unique (date, time) constraint prevents double booking.
