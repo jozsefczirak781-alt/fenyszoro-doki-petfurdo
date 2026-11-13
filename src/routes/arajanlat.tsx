@@ -16,9 +16,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/arajanlat")({
   head: () => ({
     meta: [
-      { title: "Árajánlat fotó alapján – Tisztafény" },
+      { title: "Árajánlat fotó alapján – Fényszóró Doki Pétfürdő" },
       { name: "description", content: "Tölts fel fotót a fényszóródról, és rövid időn belül árajánlatot adunk a felújításra." },
-      { property: "og:title", content: "Árajánlat fotó alapján – Tisztafény" },
+      { property: "og:title", content: "Árajánlat fotó alapján – Fényszóró Doki Pétfürdő" },
       { property: "og:description", content: "Fotózd le a fényszórót, mi megmondjuk, mennyiből lesz újra tiszta." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

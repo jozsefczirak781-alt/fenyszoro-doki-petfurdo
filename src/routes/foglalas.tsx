@@ -21,9 +21,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/foglalas")({
   head: () => ({
     meta: [
-      { title: "Időpontfoglalás – Tisztafény" },
+      { title: "Időpontfoglalás – Fényszóró Doki Pétfürdő" },
       { name: "description", content: "Foglalj időpontot fényszóró-felújításra pár koppintással." },
-      { property: "og:title", content: "Időpontfoglalás – Tisztafény" },
+      { property: "og:title", content: "Időpontfoglalás – Fényszóró Doki Pétfürdő" },
       { property: "og:description", content: "Válassz szolgáltatást, napot és időpontot – online, pár koppintással." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
