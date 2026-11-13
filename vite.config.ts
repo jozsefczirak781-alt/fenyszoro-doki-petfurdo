@@ -15,4 +15,27 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    // Pre-bundle the browser deps the pages use, so the dev server never re-optimizes them
+    // mid-session (that loads a second React copy and blanks the preview).
+    optimizeDeps: {
+      include: [
+        "react",
+        "react-dom",
+        "react-dom/client",
+        "@supabase/supabase-js",
+        "lucide-react",
+        "sonner",
+        "@radix-ui/react-slot",
+        "@radix-ui/react-label",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "date-fns",
+        "date-fns/locale",
+        "react-day-picker",
+        "zod",
+      ],
+    },
+  },
 });

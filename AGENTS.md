@@ -35,3 +35,4 @@ use the editor.
 - Price list and services live in `src/lib/services.ts`; opening hours and bookable slots live in `src/lib/schedule.ts` (dates as `YYYY-MM-DD` in Europe/Budapest), covered by `schedule.test.ts`. Why: booking page, price page and server validation must share one source.
 - Quote requests and bookings are written only by server functions in `src/lib/workshop.functions.ts` using the admin client; the tables have RLS on with no public policies, and photos go to the private `quote-photos` bucket. Why: visitors must never read other customers' data.
 - Taken booking times are read through the `get_booked_times(date)` database function, which exposes times only. A unique (date, time) constraint prevents double booking.
+- Browser deps used by pages are listed in vite.config.ts optimizeDeps.include. Why: lazy re-optimization in dev loads a second React copy and blanks the preview.
