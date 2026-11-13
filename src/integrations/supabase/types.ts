@@ -14,13 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          booking_date: string
+          booking_time: string
+          car: string
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          note: string | null
+          phone: string
+          service: string
+        }
+        Insert: {
+          booking_date: string
+          booking_time: string
+          car: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          note?: string | null
+          phone: string
+          service: string
+        }
+        Update: {
+          booking_date?: string
+          booking_time?: string
+          car?: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          note?: string | null
+          phone?: string
+          service?: string
+        }
+        Relationships: []
+      }
+      quote_requests: {
+        Row: {
+          car: string
+          created_at: string
+          email: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          photo_paths: string[]
+          problem: string
+          status: string
+        }
+        Insert: {
+          car: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          photo_paths?: string[]
+          problem: string
+          status?: string
+        }
+        Update: {
+          car?: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          photo_paths?: string[]
+          problem?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_booked_times: { Args: { _date: string }; Returns: string[] }
     }
     Enums: {
       [_ in never]: never
