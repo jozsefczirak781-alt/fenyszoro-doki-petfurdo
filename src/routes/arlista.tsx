@@ -22,7 +22,7 @@ function PriceListPage() {
   return (
     <main>
       <PageHeader eyebrow="Szolgáltatások" title="Árlista">
-        Az árak bruttó árak. A pontos árat a fotók alapján mondjuk meg.
+        A pontos árat a fényszóró állapota alapján, fotók segítségével mondjuk meg.
       </PageHeader>
 
       <div className="space-y-8 px-5">
