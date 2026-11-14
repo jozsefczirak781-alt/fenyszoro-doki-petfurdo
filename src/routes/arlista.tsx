@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Camera } from "lucide-react";
+import { Camera, Phone } from "lucide-react";
 import { PageHeader } from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
 import { PRICE_LIST, formatHuf } from "@/lib/services";
+import { PHONE_TEL } from "@/lib/contact";
 
 export const Route = createFileRoute("/arlista")({
   head: () => ({
@@ -75,9 +76,9 @@ function PriceListPage() {
               </Link>
             </Button>
             <Button asChild variant="surface" size="lg" className="flex-1">
-              <Link to="/foglalas">
-                Foglalás <ArrowRight />
-              </Link>
+              <a href={PHONE_TEL}>
+                <Phone /> Hívás
+              </a>
             </Button>
           </div>
         </div>
