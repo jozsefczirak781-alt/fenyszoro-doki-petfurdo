@@ -75,9 +75,9 @@ function PriceListPage() {
               </Link>
             </Button>
             <Button asChild variant="surface" size="lg" className="flex-1">
-              <Link to="/foglalas">
-                Foglalás <ArrowRight />
-              </Link>
+              <a href={PHONE_TEL}>
+                <Phone /> Hívás
+              </a>
             </Button>
           </div>
         </div>

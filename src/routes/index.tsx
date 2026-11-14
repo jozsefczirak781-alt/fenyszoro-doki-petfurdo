@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarCheck, Camera, Clock, ReceiptText, ShieldCheck, Sparkles, Timer } from "lucide-react";
+import { CalendarCheck, Camera, Clock, Phone, ReceiptText, ShieldCheck, Sparkles, Timer } from "lucide-react";
 import heroImg from "@/assets/hero-headlight.jpg";
 import beforeAfterImg from "@/assets/before-after.jpg";
 import { Button } from "@/components/ui/button";
 import { OPENING_HOURS } from "@/lib/schedule";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,12 +12,12 @@ export const Route = createFileRoute("/")({
       { title: "Fényszóró Doki Pétfürdő – Újra tiszta fényszórók" },
       {
         name: "description",
-        content: "Sárgult, matt vagy párás fényszóró? Kérj árajánlatot egy fotóval, nézd meg az árlistát, és foglalj időpontot.",
+        content: "Sárgult, matt vagy párás fényszóró? Kérj árajánlatot egy fotóval, nézd meg az árlistát, és foglalj időpontot telefonon.",
       },
       { property: "og:title", content: "Fényszóró Doki Pétfürdő – Újra tiszta fényszórók" },
       {
         property: "og:description",
-        content: "Fényszóró-felújítás: árajánlat fotó alapján, átlátható árak, online időpontfoglalás.",
+        content: "Fényszóró-felújítás: árajánlat fotó alapján, átlátható árak, időpontfoglalás telefonon.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -33,7 +34,7 @@ const QUICK = [
 const STEPS = [
   { icon: Camera, title: "Fotózd le", text: "Küldj 1–6 képet a fényszóróról az appban." },
   { icon: Sparkles, title: "Megkapod az ajánlatot", text: "Átnézzük a képeket, és visszahívunk az árral." },
-  { icon: CalendarCheck, title: "Gyere be", text: "Foglalj időpontot – a legtöbb munka pár óra alatt kész." },
+  { icon: CalendarCheck, title: "Gyere be", text: "Hívj minket időpontért – a legtöbb munka pár óra alatt kész." },
 ];
 
 function Index() {
@@ -72,10 +73,10 @@ function Index() {
                 <Camera /> Árajánlatot kérek
               </Link>
             </Button>
-            <Button asChild variant="surface" size="xl" aria-label="Időpontfoglalás">
-              <Link to="/foglalas">
-                <CalendarCheck />
-              </Link>
+            <Button asChild variant="surface" size="xl" aria-label="Időpontfoglalás telefonon">
+              <a href={PHONE_TEL}>
+                <Phone />
+              </a>
             </Button>
           </div>
         </div>
@@ -162,9 +163,9 @@ function Index() {
             ))}
           </dl>
           <Button asChild variant="beam" size="lg" className="mt-4 w-full">
-            <Link to="/foglalas">
-              Időpontot foglalok <ArrowRight />
-            </Link>
+            <a href={PHONE_TEL}>
+              <Phone /> Időpontfoglalás: {PHONE_DISPLAY}
+            </a>
           </Button>
         </div>
       </section>
