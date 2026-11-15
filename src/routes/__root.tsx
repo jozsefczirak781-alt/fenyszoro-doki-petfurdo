@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { BottomNav } from "@/components/app/BottomNav";
+import { TopNav } from "@/components/app/TopNav";
 import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -131,7 +132,8 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <div className="relative mx-auto min-h-screen max-w-md bg-background pb-28">
+      <TopNav />
+      <div className="relative mx-auto min-h-screen max-w-md bg-background pb-28 md:max-w-6xl md:pb-20">
         <Outlet />
       </div>
       <BottomNav />
