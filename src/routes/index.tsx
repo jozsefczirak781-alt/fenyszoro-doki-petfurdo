@@ -147,6 +147,25 @@ function Index() {
       </div>
 
       <section className="px-5 pt-10 md:px-8 md:pt-14">
+        <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Referencia munkák</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Így néztek ki az ügyfeleink fényszórói felújítás előtt és után.</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-2 md:gap-6">
+          <BeforeAfterSlider
+            before={ref1Before}
+            after={ref1After}
+            beforeAlt="Matt, sárgult fényszóró felújítás előtt"
+            afterAlt="Felújított, átlátszó fényszóró utána"
+          />
+          <BeforeAfterSlider
+            before={ref2Before}
+            after={ref2After}
+            beforeAlt="Erősen oxidálódott fényszóró felújítás előtt"
+            afterAlt="Gyári tisztaságú fényszóró felújítás után"
+          />
+        </div>
+      </section>
+
+      <section className="px-5 pt-10 md:px-8 md:pt-14">
         <div className="rounded-2xl border border-border bg-card-gradient p-5 shadow-card md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10 md:p-8">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
