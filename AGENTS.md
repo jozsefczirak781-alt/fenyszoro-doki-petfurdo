@@ -31,7 +31,7 @@ use the editor.
 
 ## Project rules
 
-- Mobile-app shell: `__root.tsx` wraps every page in a `max-w-md` column with a fixed bottom tab bar (`src/components/app/BottomNav.tsx`); new top-level pages need a tab or a link from an existing page. Why: the product is used as a phone app.
+- Responsive shell: on phones `__root.tsx` shows a `max-w-md` column with the bottom tab bar (`BottomNav.tsx`); from the `md` breakpoint it widens to `max-w-6xl` with the top menu (`TopNav.tsx`), both reading the shared `TABS` list. New top-level pages need a `TABS` entry or a link from an existing page. Why: customers use it mostly on phones, but it must also look right on computers.
 - Price list and services live in `src/lib/services.ts`; opening hours and bookable slots live in `src/lib/schedule.ts` (dates as `YYYY-MM-DD` in Europe/Budapest), covered by `schedule.test.ts`. Why: booking page, price page and server validation must share one source.
 - Quote requests and bookings are written only by server functions in `src/lib/workshop.functions.ts` using the admin client; the tables have RLS on with no public policies, and photos go to the private `quote-photos` bucket. Why: visitors must never read other customers' data.
 - Appointments are booked by phone only: the booking page is a call screen, and the number lives in `src/lib/contact.ts`. The online booking server function and tables are kept but unused. Why: the owner wants to agree times personally.

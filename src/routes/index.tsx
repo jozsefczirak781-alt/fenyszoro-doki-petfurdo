@@ -40,34 +40,33 @@ const STEPS = [
 function Index() {
   return (
     <main>
-      <section className="relative h-[78vh] min-h-[520px] overflow-hidden">
-        <img
-          src={heroImg}
-          alt="Felújított, tisztán világító autó fényszóró"
-          width={1024}
-          height={1280}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-fade" />
-        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 pt-5">
-          <span className="font-display text-xl font-extrabold uppercase tracking-wider">
+      <section className="relative h-[78vh] min-h-[520px] overflow-hidden md:grid md:h-auto md:min-h-0 md:grid-cols-2 md:items-center md:gap-12 md:overflow-visible md:px-8 md:pt-14">
+        <div className="absolute inset-0 md:relative md:order-2 md:aspect-[4/5] md:overflow-hidden md:rounded-3xl md:border md:border-border md:shadow-card lg:aspect-[5/6]">
+          <img
+            src={heroImg}
+            alt="Felújított, tisztán világító autó fényszóró"
+            width={1024}
+            height={1280}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-fade md:hidden" />
+        </div>
+        <div className="absolute inset-x-0 top-0 px-5 pt-6 md:hidden">
+          <span className="block font-display text-[2rem] font-extrabold uppercase leading-none tracking-wide">
             Fényszóró <span className="text-primary">Doki</span> Pétfürdő
           </span>
-          <span className="rounded-full border border-border bg-background/50 px-3 py-1 text-[11px] font-semibold backdrop-blur">
-            Fényszóró-műhely
-          </span>
         </div>
-        <div className="absolute inset-x-0 bottom-0 px-5 pb-6 animate-rise">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Fényszóró-felújítás</p>
-          <h1 className="mt-2 text-[3.4rem] font-extrabold uppercase leading-[0.9]">
+        <div className="absolute inset-x-0 bottom-0 px-5 pb-6 animate-rise md:static md:order-1 md:p-0">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary md:text-sm">Fényszóró-felújítás</p>
+          <h1 className="mt-2 text-[3.4rem] font-extrabold uppercase leading-[0.9] md:text-7xl lg:text-8xl">
             Újra <span className="text-beam">tiszta</span>
             <br />
             fény.
           </h1>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground md:mt-5 md:max-w-md md:text-base">
             Sárgult, matt vagy párás fényszóró? Küldj egy fotót, és megmondjuk, mennyiből lesz újra olyan, mint az új.
           </p>
-          <div className="mt-5 flex gap-3">
+          <div className="mt-5 flex gap-3 md:mt-8 md:max-w-md">
             <Button asChild variant="beam" size="xl" className="flex-1 beam-sweep">
               <Link to="/arajanlat">
                 <Camera /> Árajánlatot kérek
@@ -82,87 +81,91 @@ function Index() {
         </div>
       </section>
 
-      <section className="grid grid-cols-2 gap-3 px-5 pt-2">
+      <section className="grid grid-cols-2 gap-3 px-5 pt-2 md:gap-5 md:px-8 md:pt-12">
         {QUICK.map(({ to, icon: Icon, title, text }) => (
           <Link
             key={to}
             to={to}
-            className="group rounded-2xl border border-border bg-card-gradient p-4 shadow-card transition-transform active:scale-[0.98]"
+            className="group rounded-2xl border border-border bg-card-gradient p-4 shadow-card transition-transform active:scale-[0.98] md:p-6 md:hover:border-primary/40"
           >
             <Icon className="size-6 text-primary" />
-            <p className="mt-3 font-display text-xl font-bold uppercase">{title}</p>
-            <p className="text-xs text-muted-foreground">{text}</p>
+            <p className="mt-3 font-display text-xl font-bold uppercase md:text-2xl">{title}</p>
+            <p className="text-xs text-muted-foreground md:text-sm">{text}</p>
           </Link>
         ))}
       </section>
 
-      <section className="px-5 pt-10">
-        <h2 className="text-2xl font-extrabold uppercase">Előtte / utána</h2>
-        <div className="relative mt-3 overflow-hidden rounded-2xl border border-border shadow-card">
-          <img
-            src={beforeAfterImg}
-            alt="Sárgult fényszóró felújítás előtt és kristálytiszta fényszóró utána"
-            width={1280}
-            height={800}
-            loading="lazy"
-            className="w-full"
-          />
-          <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">
-            Előtte
-          </span>
-          <span className="absolute right-3 top-3 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">
-            Utána
-          </span>
-        </div>
-        <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-          {[
-            { icon: Timer, label: "1–3 óra" },
-            { icon: ShieldCheck, label: "Kerámia védelem" },
-            { icon: Sparkles, label: "Gyári tisztaság" },
-          ].map(({ icon: Icon, label }) => (
-            <div key={label} className="rounded-xl bg-secondary py-3">
-              <Icon className="mx-auto size-5 text-primary" />
-              <p className="mt-1 text-[11px] font-semibold">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="px-5 pt-10">
-        <h2 className="text-2xl font-extrabold uppercase">Így működik</h2>
-        <ol className="mt-4 space-y-3">
-          {STEPS.map(({ icon: Icon, title, text }, i) => (
-            <li key={title} className="flex gap-4 rounded-2xl border border-border bg-surface p-4">
-              <div className="relative flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15">
-                <Icon className="size-5 text-primary" />
-                <span className="absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
-                  {i + 1}
-                </span>
-              </div>
-              <div>
-                <p className="font-bold">{title}</p>
-                <p className="text-sm text-muted-foreground">{text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="px-5 pt-10">
-        <div className="rounded-2xl border border-border bg-card-gradient p-5 shadow-card">
-          <div className="flex items-center gap-2">
-            <Clock className="size-5 text-primary" />
-            <h2 className="text-xl font-extrabold uppercase">Nyitvatartás</h2>
+      <div className="md:grid md:grid-cols-2 md:gap-10 md:px-8 md:pt-6">
+        <section className="px-5 pt-10 md:px-0">
+          <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Előtte / utána</h2>
+          <div className="relative mt-3 overflow-hidden rounded-2xl border border-border shadow-card">
+            <img
+              src={beforeAfterImg}
+              alt="Sárgult fényszóró felújítás előtt és kristálytiszta fényszóró utána"
+              width={1280}
+              height={800}
+              loading="lazy"
+              className="w-full"
+            />
+            <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">
+              Előtte
+            </span>
+            <span className="absolute right-3 top-3 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">
+              Utána
+            </span>
           </div>
-          <dl className="mt-3 divide-y divide-border text-sm">
-            {OPENING_HOURS.map((o) => (
-              <div key={o.days} className="flex justify-between py-2.5">
-                <dt className="text-muted-foreground">{o.days}</dt>
-                <dd className="font-semibold">{o.hours}</dd>
+          <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+            {[
+              { icon: Timer, label: "1–3 óra" },
+              { icon: ShieldCheck, label: "Kerámia védelem" },
+              { icon: Sparkles, label: "Gyári tisztaság" },
+            ].map(({ icon: Icon, label }) => (
+              <div key={label} className="rounded-xl bg-secondary py-3">
+                <Icon className="mx-auto size-5 text-primary" />
+                <p className="mt-1 text-[11px] font-semibold md:text-xs">{label}</p>
               </div>
             ))}
-          </dl>
-          <Button asChild variant="beam" size="lg" className="mt-4 w-full">
+          </div>
+        </section>
+
+        <section className="px-5 pt-10 md:px-0">
+          <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Így működik</h2>
+          <ol className="mt-4 space-y-3">
+            {STEPS.map(({ icon: Icon, title, text }, i) => (
+              <li key={title} className="flex gap-4 rounded-2xl border border-border bg-surface p-4 md:p-5">
+                <div className="relative flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15">
+                  <Icon className="size-5 text-primary" />
+                  <span className="absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                    {i + 1}
+                  </span>
+                </div>
+                <div>
+                  <p className="font-bold">{title}</p>
+                  <p className="text-sm text-muted-foreground">{text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+
+      <section className="px-5 pt-10 md:px-8 md:pt-14">
+        <div className="rounded-2xl border border-border bg-card-gradient p-5 shadow-card md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10 md:p-8">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <Clock className="size-5 text-primary" />
+              <h2 className="text-xl font-extrabold uppercase md:text-2xl">Nyitvatartás</h2>
+            </div>
+            <dl className="mt-3 divide-y divide-border text-sm md:text-base">
+              {OPENING_HOURS.map((o) => (
+                <div key={o.days} className="flex justify-between py-2.5">
+                  <dt className="text-muted-foreground">{o.days}</dt>
+                  <dd className="font-semibold">{o.hours}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <Button asChild variant="beam" size="lg" className="mt-4 w-full md:mt-0 md:w-auto">
             <a href={PHONE_TEL}>
               <Phone /> Időpontfoglalás: {PHONE_DISPLAY}
             </a>

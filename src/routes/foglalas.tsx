@@ -27,8 +27,8 @@ function BookingPage() {
         Időpontot telefonon tudsz foglalni. Hívj minket, és együtt kiválasztjuk a neked megfelelő napot.
       </PageHeader>
 
-      <div className="space-y-8 px-5">
-        <div className="rounded-3xl border border-border bg-card-gradient p-6 text-center shadow-card animate-rise">
+      <div className="space-y-8 px-5 md:grid md:grid-cols-2 md:items-start md:gap-10 md:space-y-0 md:px-8">
+        <div className="rounded-3xl border border-border bg-card-gradient p-6 text-center shadow-card animate-rise md:sticky md:top-24 md:p-10">
           <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-beam shadow-glow">
             <Phone className="size-7 text-primary-foreground" />
           </div>
@@ -51,6 +51,7 @@ function BookingPage() {
           </div>
         </div>
 
+        <div className="space-y-8">
         <Section title="Mit mondj a telefonban?">
           <ul className="space-y-2 text-sm">
             {["Melyik szolgáltatást kéred", "Milyen autóról van szó (márka, típus)", "Mikor lenne jó neked"].map((t, i) => (
@@ -77,6 +78,7 @@ function BookingPage() {
             ))}
           </ul>
         </Section>
+        </div>
       </div>
     </main>
   );

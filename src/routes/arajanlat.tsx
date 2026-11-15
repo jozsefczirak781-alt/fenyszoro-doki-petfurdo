@@ -117,7 +117,8 @@ function QuotePage() {
         Fotózd le a fényszórót közelről és kicsit távolabbról, nappali fényben. A képek alapján megmondjuk az árat.
       </PageHeader>
 
-      <form onSubmit={onSubmit} className="space-y-8 px-5">
+      <form onSubmit={onSubmit} className="space-y-8 px-5 md:grid md:grid-cols-2 md:items-start md:gap-10 md:space-y-0 md:px-8">
+        <div className="space-y-8">
         <Section title="Fotók" step={1}>
           <div className="grid grid-cols-3 gap-2.5">
             {photos.map((p, i) => (
@@ -188,6 +189,9 @@ function QuotePage() {
           </Field>
         </Section>
 
+        </div>
+
+        <div className="space-y-8 md:sticky md:top-24 md:rounded-3xl md:border md:border-border md:bg-card-gradient md:p-6 md:shadow-card">
         <Section title="Elérhetőség" step={3}>
           <Field id="name" label="Név">
             <Input id="name" name="name" required minLength={2} autoComplete="name" className={inputClass} />
@@ -204,6 +208,7 @@ function QuotePage() {
           {sending ? <Loader2 className="animate-spin" /> : <Send />}
           {sending ? "Küldés…" : "Árajánlatot kérek"}
         </Button>
+        </div>
       </form>
     </main>
   );

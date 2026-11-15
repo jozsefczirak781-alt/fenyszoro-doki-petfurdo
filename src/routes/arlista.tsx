@@ -26,18 +26,18 @@ function PriceListPage() {
         A pontos árat a fényszóró állapota alapján, fotók segítségével mondjuk meg.
       </PageHeader>
 
-      <div className="space-y-8 px-5">
+      <div className="space-y-8 px-5 md:space-y-10 md:px-8">
         {PRICE_LIST.map((cat) => (
           <section key={cat.title}>
             <h2 className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-muted-foreground">{cat.title}</h2>
-            <ul className="space-y-3">
+            <ul className="space-y-3 md:grid md:grid-cols-2 md:gap-5 md:space-y-0 lg:grid-cols-3">
               {cat.items.map((item) => (
                 <li
                   key={item.id}
                   className={
                     item.popular
-                      ? "relative rounded-2xl border border-primary/40 bg-card-gradient p-4 shadow-glow"
-                      : "relative rounded-2xl border border-border bg-card-gradient p-4 shadow-card"
+                      ? "relative rounded-2xl border border-primary/40 bg-card-gradient p-4 shadow-glow md:p-6"
+                      : "relative rounded-2xl border border-border bg-card-gradient p-4 shadow-card md:p-6"
                   }
                 >
                   {item.popular && (
@@ -66,10 +66,12 @@ function PriceListPage() {
           </section>
         ))}
 
-        <div className="rounded-2xl border border-border bg-surface p-5">
-          <p className="font-display text-xl font-bold uppercase">Nem biztos, mi kell?</p>
+        <div className="rounded-2xl border border-border bg-surface p-5 md:flex md:items-center md:justify-between md:gap-8 md:p-8">
+          <div>
+            <p className="font-display text-xl font-bold uppercase md:text-2xl">Nem biztos, mi kell?</p>
           <p className="mt-1 text-sm text-muted-foreground">Küldj fotót, és megmondjuk, melyik megoldás a jó az autódnak.</p>
-          <div className="mt-4 flex gap-3">
+          </div>
+          <div className="mt-4 flex gap-3 md:mt-0 md:w-80 md:shrink-0">
             <Button asChild variant="beam" size="lg" className="flex-1">
               <Link to="/arajanlat">
                 <Camera /> Árajánlat

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { CalendarCheck, Camera, Home, ReceiptText } from "lucide-react";
 
-const TABS = [
+export const TABS = [
   { to: "/", label: "Főoldal", icon: Home, exact: true },
   { to: "/arajanlat", label: "Árajánlat", icon: Camera, exact: false },
   { to: "/arlista", label: "Árlista", icon: ReceiptText, exact: false },
@@ -12,7 +12,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Fő navigáció"
-      className="fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md border-t border-border bg-surface/85 pb-safe backdrop-blur-xl"
+      className="fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md border-t border-border bg-surface/85 pb-safe backdrop-blur-xl md:hidden"
     >
       <ul className="grid grid-cols-4">
         {TABS.map(({ to, label, icon: Icon, exact }) => (
