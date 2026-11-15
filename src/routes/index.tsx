@@ -1,7 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarCheck, Camera, Clock, Phone, ReceiptText, ShieldCheck, Sparkles, Timer } from "lucide-react";
 import heroImg from "@/assets/hero-headlight.jpg";
-import beforeAfterImg from "@/assets/before-after.jpg";
+import ref1Before from "@/assets/ref-1-before.jpg";
+import ref1After from "@/assets/ref-1-after.jpg";
+import ref2Before from "@/assets/ref-2-before.jpg";
+import ref2After from "@/assets/ref-2-after.jpg";
+import { BeforeAfterSlider } from "@/components/app/BeforeAfterSlider";
 import { Button } from "@/components/ui/button";
 import { OPENING_HOURS } from "@/lib/schedule";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
@@ -98,21 +102,14 @@ function Index() {
       <div className="md:grid md:grid-cols-2 md:gap-10 md:px-8 md:pt-6">
         <section className="px-5 pt-10 md:px-0">
           <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Előtte / utána</h2>
-          <div className="relative mt-3 overflow-hidden rounded-2xl border border-border shadow-card">
-            <img
-              src={beforeAfterImg}
-              alt="Sárgult fényszóró felújítás előtt és kristálytiszta fényszóró utána"
-              width={1280}
-              height={800}
-              loading="lazy"
-              className="w-full"
+          <p className="mt-1 text-sm text-muted-foreground">Húzd a csúszkát, és nézd meg a különbséget!</p>
+          <div className="mt-3">
+            <BeforeAfterSlider
+              before={ref1Before}
+              after={ref1After}
+              beforeAlt="Sárgult, matt fényszóró felújítás előtt"
+              afterAlt="Kristálytiszta, felújított fényszóró"
             />
-            <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">
-              Előtte
-            </span>
-            <span className="absolute right-3 top-3 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">
-              Utána
-            </span>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-2 text-center">
             {[
