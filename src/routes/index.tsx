@@ -5,7 +5,6 @@ import ref1Before from "@/assets/ref-1-before.jpg";
 import ref1After from "@/assets/ref-1-after.jpg";
 import ref2Before from "@/assets/ref-2-before.jpg";
 import ref2After from "@/assets/ref-2-after.jpg";
-import { BeforeAfterSlider } from "@/components/app/BeforeAfterSlider";
 import { Button } from "@/components/ui/button";
 import { OPENING_HOURS } from "@/lib/schedule";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
@@ -102,14 +101,16 @@ function Index() {
       <div className="md:grid md:grid-cols-2 md:gap-10 md:px-8 md:pt-6">
         <section className="px-5 pt-10 md:px-0">
           <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Előtte / utána</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Húzd a csúszkát, és nézd meg a különbséget!</p>
-          <div className="mt-3">
-            <BeforeAfterSlider
-              before={ref1Before}
-              after={ref1After}
-              beforeAlt="Sárgult, matt fényszóró felújítás előtt"
-              afterAlt="Kristálytiszta, felújított fényszóró"
-            />
+          <p className="mt-1 text-sm text-muted-foreground">Nézd meg a különbséget!</p>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+              <img src={ref1Before} alt="Sárgult, matt fényszóró felújítás előtt" width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="absolute left-2 top-2 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">Előtte</figcaption>
+            </figure>
+            <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+              <img src={ref1After} alt="Kristálytiszta, felújított fényszóró" width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="absolute right-2 top-2 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">Utána</figcaption>
+            </figure>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-2 text-center">
             {[
@@ -150,18 +151,21 @@ function Index() {
         <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Referencia munkák</h2>
         <p className="mt-1 text-sm text-muted-foreground">Így néztek ki az ügyfeleink fényszórói felújítás előtt és után.</p>
         <div className="mt-4 grid gap-4 md:grid-cols-2 md:gap-6">
-          <BeforeAfterSlider
-            before={ref1Before}
-            after={ref1After}
-            beforeAlt="Matt, sárgult fényszóró felújítás előtt"
-            afterAlt="Felújított, átlátszó fényszóró utána"
-          />
-          <BeforeAfterSlider
-            before={ref2Before}
-            after={ref2After}
-            beforeAlt="Erősen oxidálódott fényszóró felújítás előtt"
-            afterAlt="Gyári tisztaságú fényszóró felújítás után"
-          />
+          {[
+            { before: ref1Before, after: ref1After, beforeAlt: "Matt, sárgult fényszóró felújítás előtt", afterAlt: "Felújított, átlátszó fényszóró utána" },
+            { before: ref2Before, after: ref2After, beforeAlt: "Erősen oxidálódott fényszóró felújítás előtt", afterAlt: "Gyári tisztaságú fényszóró felújítás után" },
+          ].map((ref) => (
+            <div key={ref.before} className="grid grid-cols-2 gap-2">
+              <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+                <img src={ref.before} alt={ref.beforeAlt} width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                <figcaption className="absolute left-2 top-2 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">Előtte</figcaption>
+              </figure>
+              <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+                <img src={ref.after} alt={ref.afterAlt} width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                <figcaption className="absolute right-2 top-2 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">Utána</figcaption>
+              </figure>
+            </div>
+          ))}
         </div>
       </section>
 
