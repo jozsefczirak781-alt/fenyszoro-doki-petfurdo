@@ -5,7 +5,6 @@ import ref1Before from "@/assets/ref-1-before.jpg";
 import ref1After from "@/assets/ref-1-after.jpg";
 import ref2Before from "@/assets/ref-2-before.jpg";
 import ref2After from "@/assets/ref-2-after.jpg";
-import { BeforeAfterSlider } from "@/components/app/BeforeAfterSlider";
 import { Button } from "@/components/ui/button";
 import { OPENING_HOURS } from "@/lib/schedule";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
