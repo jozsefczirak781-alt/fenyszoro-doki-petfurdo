@@ -46,7 +46,7 @@ const CAR_BRANDS = [
 ];
 
 type Photo = { file: File; url: string };
-type Errors = Partial<Record<"photos" | "car" | "phone" | "name", string>>;
+type Errors = Partial<Record<"photos" | "car" | "phone" | "name", string | undefined>>;
 type Sent = { car: string; phone: string; photos: number };
 
 function QuotePage() {
