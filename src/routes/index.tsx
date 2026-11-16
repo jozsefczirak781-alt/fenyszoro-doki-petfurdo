@@ -1,49 +1,88 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarCheck, Camera, Clock, Phone, ReceiptText, ShieldCheck, Sparkles, Timer } from "lucide-react";
+import { Camera, Check, Clock, MapPin, Phone, ReceiptText, Sparkles } from "lucide-react";
 import heroImg from "@/assets/hero-headlight.jpg";
-import ref1Before from "@/assets/ref-1-before.jpg";
-import ref1After from "@/assets/ref-1-after.jpg";
-import ref2Before from "@/assets/ref-2-before.jpg";
-import ref2After from "@/assets/ref-2-after.jpg";
+import { BeforeAfterGallery } from "@/components/app/BeforeAfterGallery";
 import { Button } from "@/components/ui/button";
 import { OPENING_HOURS } from "@/lib/schedule";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+import { ALL_SERVICES, formatHuf } from "@/lib/services";
+import { SITE_NAME, SITE_URL, pageUrlTags } from "@/lib/site";
+
+const MAIN = ALL_SERVICES.find((s) => s.id === "bura-felujitas")!;
+const EXTRAS = ALL_SERVICES.filter((s) => s.id !== MAIN.id);
+const MAIN_PRICE = `${formatHuf(MAIN.price)} / ${MAIN.unit}`;
+
+const TITLE = "Fényszóró felújítás Pétfürdő – polikarbonát gőzölés | Fényszóró Doki";
+const DESCRIPTION = `Fényszóró búra felújítás polikarbonát gőzöléses technológiával Pétfürdőn, Várpalota mellett. ${MAIN_PRICE}. Árajánlat fotó alapján.`;
+const OG_IMAGE = `${SITE_URL}/og-home.jpg`;
+
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  name: SITE_NAME,
+  url: SITE_URL,
+  image: OG_IMAGE,
+  telephone: PHONE_TEL.replace("tel:", ""),
+  description: DESCRIPTION,
+  address: { "@type": "PostalAddress", addressLocality: "Pétfürdő", postalCode: "8105", addressCountry: "HU" },
+  areaServed: [
+    { "@type": "City", name: "Pétfürdő" },
+    { "@type": "City", name: "Várpalota" },
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "08:00",
+      closes: "17:00",
+    },
+  ],
+  makesOffer: ALL_SERVICES.map((s) => ({
+    "@type": "Offer",
+    price: s.price,
+    priceCurrency: "HUF",
+    itemOffered: { "@type": "Service", name: s.name },
+  })),
+};
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Fényszóró Doki Pétfürdő – Újra tiszta fényszórók" },
-      {
-        name: "description",
-        content: "Sárgult, matt vagy párás fényszóró? Kérj árajánlatot egy fotóval, nézd meg az árlistát, és foglalj időpontot telefonon.",
-      },
-      { property: "og:title", content: "Fényszóró Doki Pétfürdő – Újra tiszta fényszórók" },
-      {
-        property: "og:description",
-        content: "Fényszóró-felújítás: árajánlat fotó alapján, átlátható árak, időpontfoglalás telefonon.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () => {
+    const url = pageUrlTags("/");
+    return {
+      meta: [
+        { title: TITLE },
+        { name: "description", content: DESCRIPTION },
+        { property: "og:title", content: TITLE },
+        { property: "og:description", content: DESCRIPTION },
+        { property: "og:type", content: "website" },
+        { property: "og:image", content: OG_IMAGE },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: OG_IMAGE },
+        ...url.meta,
+      ],
+      links: url.links,
+      scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusiness) }],
+    };
+  },
   component: Index,
 });
 
-const QUICK = [
-  { to: "/arajanlat", icon: Camera, title: "Árajánlat", text: "Fotózd le, mi árazzuk" },
-  { to: "/arlista", icon: ReceiptText, title: "Árlista", text: "Átlátható árak" },
-] as const;
-
 const STEPS = [
-  { icon: Camera, title: "Fotózd le", text: "Küldj 1–6 képet a fényszóróról az appban." },
-  { icon: Sparkles, title: "Megkapod az ajánlatot", text: "Átnézzük a képeket, és visszahívunk az árral." },
-  { icon: CalendarCheck, title: "Gyere be", text: "Hívj minket időpontért – a legtöbb munka pár óra alatt kész." },
+  { icon: Camera, title: "Fotózd le", text: "Küldj 1–6 képet a fényszóróról az ajánlatkérő oldalon." },
+  { icon: Sparkles, title: "Megkapod az ajánlatot", text: "Átnézzük a képeket, és a megadott telefonszámon jelentkezünk az árral." },
+  { icon: Phone, title: "Egyeztetünk időpontot", text: "Időpontot telefonon beszélünk meg, és jöhetsz az autóval." },
+];
+
+const PROCESS = [
+  "A sárgult, matt felső réteg eltávolítása csiszolással",
+  "Polikarbonát gőzölés: a búra felülete újra sima és átlátszó lesz",
+  "Igény szerint kerámia védőbevonat a felújított búrára",
 ];
 
 function Index() {
   return (
     <main>
-      <section className="relative h-[78vh] min-h-[520px] overflow-hidden md:grid md:h-auto md:min-h-0 md:grid-cols-2 md:items-center md:gap-12 md:overflow-visible md:px-8 md:pt-14">
+      <section className="relative h-[80vh] min-h-[560px] overflow-hidden md:grid md:h-auto md:min-h-0 md:grid-cols-2 md:items-center md:gap-12 md:overflow-visible md:px-8 md:pt-14">
         <div className="absolute inset-0 md:relative md:order-2 md:aspect-[4/5] md:overflow-hidden md:rounded-3xl md:border md:border-border md:shadow-card lg:aspect-[5/6]">
           <img
             src={heroImg}
@@ -60,72 +99,83 @@ function Index() {
           </span>
         </div>
         <div className="absolute inset-x-0 bottom-0 px-5 pb-6 animate-rise md:static md:order-1 md:p-0">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary md:text-sm">Fényszóró-felújítás</p>
-          <h1 className="mt-2 text-[3.4rem] font-extrabold uppercase leading-[0.9] md:text-7xl lg:text-8xl">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary md:text-sm">Fényszóró felújítás · Pétfürdő</p>
+          <h1 className="mt-2 text-[3.2rem] font-extrabold uppercase leading-[0.9] md:text-7xl lg:text-8xl">
             Újra <span className="text-beam">tiszta</span>
             <br />
             fény.
           </h1>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground md:mt-5 md:max-w-md md:text-base">
-            Sárgult, matt vagy párás fényszóró? Küldj egy fotót, és megmondjuk, mennyiből lesz újra olyan, mint az új.
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground md:mt-5 md:max-w-md md:text-base">
+            Fényszóró búra felújítás <strong className="text-foreground">polikarbonát gőzöléses technológiával</strong>.
           </p>
-          <div className="mt-5 flex gap-3 md:mt-8 md:max-w-md">
-            <Button asChild variant="beam" size="xl" className="flex-1 beam-sweep">
+          <p className="mt-3 inline-flex items-baseline gap-2 rounded-xl border border-primary/40 bg-background/70 px-3.5 py-2 backdrop-blur md:mt-5">
+            <span className="font-display text-3xl font-extrabold leading-none text-primary md:text-4xl">{formatHuf(MAIN.price)}</span>
+            <span className="text-sm font-semibold text-muted-foreground">/ {MAIN.unit}</span>
+          </p>
+          <div className="mt-4 grid gap-2.5 md:mt-8 md:max-w-md">
+            <Button asChild variant="beam" size="xl" className="w-full beam-sweep">
               <Link to="/arajanlat">
-                <Camera /> Árajánlatot kérek
+                <Camera /> Árajánlatot kérek fotóval
               </Link>
             </Button>
-            <Button asChild variant="surface" size="xl" aria-label="Időpontfoglalás telefonon">
+            <Button asChild variant="surface" size="xl" className="w-full">
               <a href={PHONE_TEL}>
-                <Phone />
+                <Phone /> Hívás: {PHONE_DISPLAY}
               </a>
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="grid grid-cols-2 gap-3 px-5 pt-2 md:gap-5 md:px-8 md:pt-12">
-        {QUICK.map(({ to, icon: Icon, title, text }) => (
-          <Link
-            key={to}
-            to={to}
-            className="group rounded-2xl border border-border bg-card-gradient p-4 shadow-card transition-transform active:scale-[0.98] md:p-6 md:hover:border-primary/40"
-          >
-            <Icon className="size-6 text-primary" />
-            <p className="mt-3 font-display text-xl font-bold uppercase md:text-2xl">{title}</p>
-            <p className="text-xs text-muted-foreground md:text-sm">{text}</p>
-          </Link>
-        ))}
+      <section className="px-5 pt-8 md:px-8 md:pt-14" aria-labelledby="fo-szolgaltatas">
+        <div className="relative rounded-3xl border border-primary/40 bg-card-gradient p-5 shadow-glow md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10 md:p-8">
+          <span className="absolute -top-3 left-5 rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase text-accent-foreground">
+            Fő szolgáltatás
+          </span>
+          <div className="min-w-0">
+            <h2 id="fo-szolgaltatas" className="text-2xl font-extrabold uppercase leading-tight md:text-3xl">
+              Fényszóró búra felújítás polikarbonát gőzöléssel
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
+              A mai autók fényszóróbúrája polikarbonátból készül, ami az évek alatt sárgul, mattul. Gőzöléses technológiával
+              újra átlátszóvá tesszük, így a fényszóró ismét jól világít.
+            </p>
+            <ul className="mt-4 space-y-2">
+              {PROCESS.map((p) => (
+                <li key={p} className="flex gap-2.5 text-sm">
+                  <Check className="mt-0.5 size-4 shrink-0 text-primary" />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-5 rounded-2xl border border-border bg-surface p-4 text-center md:mt-0 md:w-72 md:p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Ár</p>
+            <p className="mt-1 font-display text-5xl font-extrabold leading-none text-primary">{formatHuf(MAIN.price)}</p>
+            <p className="mt-1 text-sm font-semibold text-muted-foreground">/ {MAIN.unit}</p>
+            <div className="mt-4 grid gap-2">
+              <Button asChild variant="beam" size="lg" className="h-12 w-full rounded-xl">
+                <Link to="/arajanlat">
+                  <Camera /> Ajánlatkérés
+                </Link>
+              </Button>
+              <Button asChild variant="surface" size="lg" className="h-12 w-full rounded-xl">
+                <a href={PHONE_TEL}>
+                  <Phone /> Hívás most
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 pt-10 md:px-8 md:pt-14" aria-labelledby="galeria">
+        <h2 id="galeria" className="text-2xl font-extrabold uppercase md:text-3xl">Előtte – utána</h2>
+        <p className="mb-4 mt-1 text-sm text-muted-foreground">Koppints egy képpárra a nagyításhoz és az összehasonlításhoz.</p>
+        <BeforeAfterGallery />
       </section>
 
       <div className="md:grid md:grid-cols-2 md:gap-10 md:px-8 md:pt-6">
-        <section className="px-5 pt-10 md:px-0">
-          <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Előtte / utána</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Nézd meg a különbséget!</p>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
-              <img src={ref1Before} alt="Sárgult, matt fényszóró felújítás előtt" width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-              <figcaption className="absolute left-2 top-2 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">Előtte</figcaption>
-            </figure>
-            <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
-              <img src={ref1After} alt="Kristálytiszta, felújított fényszóró" width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-              <figcaption className="absolute right-2 top-2 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">Utána</figcaption>
-            </figure>
-          </div>
-          <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-            {[
-              { icon: Timer, label: "1–3 óra" },
-              { icon: ShieldCheck, label: "Kerámia védelem" },
-              { icon: Sparkles, label: "Gyári tisztaság" },
-            ].map(({ icon: Icon, label }) => (
-              <div key={label} className="rounded-xl bg-secondary py-3">
-                <Icon className="mx-auto size-5 text-primary" />
-                <p className="mt-1 text-[11px] font-semibold md:text-xs">{label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section className="px-5 pt-10 md:px-0">
           <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Így működik</h2>
           <ol className="mt-4 space-y-3">
@@ -137,7 +187,7 @@ function Index() {
                     {i + 1}
                   </span>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="font-bold">{title}</p>
                   <p className="text-sm text-muted-foreground">{text}</p>
                 </div>
@@ -145,49 +195,53 @@ function Index() {
             ))}
           </ol>
         </section>
-      </div>
 
-      <section className="px-5 pt-10 md:px-8 md:pt-14">
-        <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Referencia munkák</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Így néztek ki az ügyfeleink fényszórói felújítás előtt és után.</p>
-        <div className="mt-4 grid gap-4 md:grid-cols-2 md:gap-6">
-          {[
-            { before: ref1Before, after: ref1After, beforeAlt: "Matt, sárgult fényszóró felújítás előtt", afterAlt: "Felújított, átlátszó fényszóró utána" },
-            { before: ref2Before, after: ref2After, beforeAlt: "Erősen oxidálódott fényszóró felújítás előtt", afterAlt: "Gyári tisztaságú fényszóró felújítás után" },
-          ].map((ref) => (
-            <div key={ref.before} className="grid grid-cols-2 gap-2">
-              <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
-                <img src={ref.before} alt={ref.beforeAlt} width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-                <figcaption className="absolute left-2 top-2 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">Előtte</figcaption>
-              </figure>
-              <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
-                <img src={ref.after} alt={ref.afterAlt} width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-                <figcaption className="absolute right-2 top-2 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">Utána</figcaption>
-              </figure>
-            </div>
-          ))}
-        </div>
-      </section>
+        <section className="px-5 pt-10 md:px-0">
+          <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Kiegészítők</h2>
+          <ul className="mt-4 space-y-3">
+            {EXTRAS.map((s) => (
+              <li key={s.id} className="flex items-start justify-between gap-4 rounded-2xl border border-border bg-surface p-4 md:p-5">
+                <div className="min-w-0">
+                  <p className="font-bold leading-snug">{s.name}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.description}</p>
+                </div>
+                <p className="shrink-0 text-right font-display text-xl font-extrabold leading-none text-primary">
+                  {formatHuf(s.price)}
+                  <span className="mt-1 block font-sans text-[11px] font-semibold text-muted-foreground">/ {s.unit}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+          <Button asChild variant="surface" size="lg" className="mt-3 h-12 w-full rounded-xl">
+            <Link to="/arlista">
+              <ReceiptText /> Teljes árlista
+            </Link>
+          </Button>
+        </section>
+      </div>
 
       <section className="px-5 pt-10 md:px-8 md:pt-14">
         <div className="rounded-2xl border border-border bg-card-gradient p-5 shadow-card md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10 md:p-8">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <Clock className="size-5 text-primary" />
+              <Clock className="size-5 shrink-0 text-primary" />
               <h2 className="text-xl font-extrabold uppercase md:text-2xl">Nyitvatartás</h2>
             </div>
             <dl className="mt-3 divide-y divide-border text-sm md:text-base">
               {OPENING_HOURS.map((o) => (
-                <div key={o.days} className="flex justify-between py-2.5">
+                <div key={o.days} className="flex justify-between gap-3 py-2.5">
                   <dt className="text-muted-foreground">{o.days}</dt>
                   <dd className="font-semibold">{o.hours}</dd>
                 </div>
               ))}
             </dl>
+            <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPin className="size-4 shrink-0 text-primary" /> Pétfürdő – Várpalota és környéke
+            </p>
           </div>
-          <Button asChild variant="beam" size="lg" className="mt-4 w-full md:mt-0 md:w-auto">
+          <Button asChild variant="beam" size="xl" className="mt-4 w-full md:mt-0 md:w-auto">
             <a href={PHONE_TEL}>
-              <Phone /> Időpontfoglalás: {PHONE_DISPLAY}
+              <Phone /> Időpont: {PHONE_DISPLAY}
             </a>
           </Button>
         </div>
