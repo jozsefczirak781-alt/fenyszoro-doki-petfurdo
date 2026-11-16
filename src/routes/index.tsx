@@ -151,18 +151,21 @@ function Index() {
         <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Referencia munkák</h2>
         <p className="mt-1 text-sm text-muted-foreground">Így néztek ki az ügyfeleink fényszórói felújítás előtt és után.</p>
         <div className="mt-4 grid gap-4 md:grid-cols-2 md:gap-6">
-          <BeforeAfterSlider
-            before={ref1Before}
-            after={ref1After}
-            beforeAlt="Matt, sárgult fényszóró felújítás előtt"
-            afterAlt="Felújított, átlátszó fényszóró utána"
-          />
-          <BeforeAfterSlider
-            before={ref2Before}
-            after={ref2After}
-            beforeAlt="Erősen oxidálódott fényszóró felújítás előtt"
-            afterAlt="Gyári tisztaságú fényszóró felújítás után"
-          />
+          {[
+            { before: ref1Before, after: ref1After, beforeAlt: "Matt, sárgult fényszóró felújítás előtt", afterAlt: "Felújított, átlátszó fényszóró utána" },
+            { before: ref2Before, after: ref2After, beforeAlt: "Erősen oxidálódott fényszóró felújítás előtt", afterAlt: "Gyári tisztaságú fényszóró felújítás után" },
+          ].map((ref) => (
+            <div key={ref.before} className="grid grid-cols-2 gap-2">
+              <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+                <img src={ref.before} alt={ref.beforeAlt} width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                <figcaption className="absolute left-2 top-2 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">Előtte</figcaption>
+              </figure>
+              <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+                <img src={ref.after} alt={ref.afterAlt} width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                <figcaption className="absolute right-2 top-2 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">Utána</figcaption>
+              </figure>
+            </div>
+          ))}
         </div>
       </section>
 
