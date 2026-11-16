@@ -101,14 +101,16 @@ function Index() {
       <div className="md:grid md:grid-cols-2 md:gap-10 md:px-8 md:pt-6">
         <section className="px-5 pt-10 md:px-0">
           <h2 className="text-2xl font-extrabold uppercase md:text-3xl">Előtte / utána</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Húzd a csúszkát, és nézd meg a különbséget!</p>
-          <div className="mt-3">
-            <BeforeAfterSlider
-              before={ref1Before}
-              after={ref1After}
-              beforeAlt="Sárgult, matt fényszóró felújítás előtt"
-              afterAlt="Kristálytiszta, felújított fényszóró"
-            />
+          <p className="mt-1 text-sm text-muted-foreground">Nézd meg a különbséget!</p>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+              <img src={ref1Before} alt="Sárgult, matt fényszóró felújítás előtt" width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="absolute left-2 top-2 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold uppercase text-accent-foreground">Előtte</figcaption>
+            </figure>
+            <figure className="relative overflow-hidden rounded-2xl border border-border shadow-card">
+              <img src={ref1After} alt="Kristálytiszta, felújított fényszóró" width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="absolute right-2 top-2 rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold uppercase text-primary-foreground">Utána</figcaption>
+            </figure>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-2 text-center">
             {[
