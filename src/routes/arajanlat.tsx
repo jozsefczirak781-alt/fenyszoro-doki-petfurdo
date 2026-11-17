@@ -365,7 +365,7 @@ function QuotePage() {
           </Button>
           <p className="text-center text-xs text-muted-foreground">
             Inkább telefonálnál?{" "}
-            <a href={PHONE_TEL} className="font-semibold text-primary underline-offset-4 hover:underline">
+            <a href={PHONE_TEL} className="inline-flex min-h-11 items-center font-semibold text-primary underline-offset-4 hover:underline">
               {PHONE_DISPLAY}
             </a>
           </p>
