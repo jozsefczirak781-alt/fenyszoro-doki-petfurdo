@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Camera, Check, Clock, MapPin, Phone, ReceiptText, Sparkles } from "lucide-react";
 import heroImg from "@/assets/hero-headlight.jpg";
 import { BeforeAfterGallery } from "@/components/app/BeforeAfterGallery";
+import { FAQ_ITEMS, FaqSection } from "@/components/app/FaqSection";
 import { Button } from "@/components/ui/button";
 import { OPENING_HOURS } from "@/lib/schedule";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
@@ -45,6 +46,16 @@ const localBusiness = {
   })),
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+
 export const Route = createFileRoute("/")({
   head: () => {
     const url = pageUrlTags("/");
@@ -61,7 +72,10 @@ export const Route = createFileRoute("/")({
         ...url.meta,
       ],
       links: url.links,
-      scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusiness) }],
+      scripts: [
+        { type: "application/ld+json", children: JSON.stringify(localBusiness) },
+        { type: "application/ld+json", children: JSON.stringify(faqSchema) },
+      ],
     };
   },
   component: Index,
@@ -219,6 +233,8 @@ function Index() {
           </Button>
         </section>
       </div>
+
+      <FaqSection />
 
       <section className="px-5 pt-10 md:px-8 md:pt-14">
         <div className="rounded-2xl border border-border bg-card-gradient p-5 shadow-card md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10 md:p-8">
