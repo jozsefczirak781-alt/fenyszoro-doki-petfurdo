@@ -5,18 +5,26 @@ import { Button } from "@/components/ui/button";
 import { ALL_SERVICES, formatHuf } from "@/lib/services";
 import { OPENING_HOURS } from "@/lib/schedule";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+import { pageUrlTags } from "@/lib/site";
 
 export const Route = createFileRoute("/foglalas")({
-  head: () => ({
-    meta: [
-      { title: "Időpontfoglalás telefonon – Fényszóró Doki Pétfürdő" },
-      { name: "description", content: `Időpontot telefonon foglalhatsz: ${PHONE_DISPLAY}. Minden nap 8:00–17:00.` },
-      { property: "og:title", content: "Időpontfoglalás telefonon – Fényszóró Doki Pétfürdő" },
-      { property: "og:description", content: `Hívj minket a ${PHONE_DISPLAY} számon, és egyeztetünk egy időpontot.` },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () => {
+    const url = pageUrlTags("/foglalas");
+    const title = "Időpont fényszóró felújításra Pétfürdő, Várpalota – Fényszóró Doki";
+    const description = `Időpont fényszóró gőzölésre és búra felújításra telefonon: ${PHONE_DISPLAY}. Pétfürdő, Várpalota mellett, minden nap 8:00–17:00.`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+        ...url.meta,
+      ],
+      links: url.links,
+    };
+  },
   component: BookingPage,
 });
 

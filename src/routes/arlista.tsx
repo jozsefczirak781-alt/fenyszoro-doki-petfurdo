@@ -4,18 +4,27 @@ import { PageHeader } from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
 import { PRICE_LIST, formatHuf } from "@/lib/services";
 import { PHONE_TEL } from "@/lib/contact";
+import { pageUrlTags } from "@/lib/site";
 
 export const Route = createFileRoute("/arlista")({
-  head: () => ({
-    meta: [
-      { title: "Árlista – Fényszóró Doki Pétfürdő" },
-      { name: "description", content: "Fényszóró búra felújítás gőzölős technológiával, kerámia védőbevonat és ózongenerátoros utastér-fertőtlenítés árai." },
-      { property: "og:title", content: "Árlista – Fényszóró Doki Pétfürdő" },
-      { property: "og:description", content: "Átlátható árak fényszóró-felújításra és javításra." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () => {
+    const url = pageUrlTags("/arlista");
+    const title = "Fényszóró felújítás ár Pétfürdő – Árlista | Fényszóró Doki";
+    const description =
+      "Fényszóró búra felújítás polikarbonát gőzöléssel 15 000 Ft/pár Pétfürdőn, Várpalota mellett. Kerámia védőbevonat és ózonos utastér-fertőtlenítés árai.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+        ...url.meta,
+      ],
+      links: url.links,
+    };
+  },
   component: PriceListPage,
 });
 
