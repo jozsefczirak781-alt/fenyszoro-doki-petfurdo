@@ -28,6 +28,7 @@ export default defineConfig({
         "sonner",
         "@radix-ui/react-slot",
         "@radix-ui/react-label",
+        "@radix-ui/react-accordion",
         "class-variance-authority",
         "clsx",
         "tailwind-merge",
