@@ -20,7 +20,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: "Van házhozszállítás vagy kiszállás?",
-    answer: "A felújítást a pétfürdői műhelyben végezzük, ahol minden eszköz rendelkezésre áll a tökéletes eredményhez. Várpalotáról és a környékről is pár perc az út hozzánk.",
+    answer: "Igen. Pétfürdőn és környékén ingyenes a kiszállás. Távolabbi kiszállás üzemanyag árban.",
   },
   {
     question: "Miért érdemes kerámia bevonatot kérni?",
