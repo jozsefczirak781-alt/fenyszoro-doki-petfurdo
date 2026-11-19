@@ -5,7 +5,8 @@ import { BeforeAfterGallery } from "@/components/app/BeforeAfterGallery";
 import { FAQ_ITEMS, FaqSection } from "@/components/app/FaqSection";
 import { Button } from "@/components/ui/button";
 import { OPENING_HOURS } from "@/lib/schedule";
-import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+import { ADDRESS_DISPLAY, MAPS_URL, PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+
 import { ALL_SERVICES, formatHuf } from "@/lib/services";
 import { SITE_NAME, SITE_URL, pageUrlTags } from "@/lib/site";
 
@@ -250,7 +251,23 @@ function Index() {
                   <dd className="font-semibold">{o.hours}</dd>
                 </div>
               ))}
-            </dl>
+            </dl>         <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+           <MapPin className="size-4 shrink-0 text-primary" /> {ADDRESS_DISPLAY}
+         </p>
+       </div>
+       <div className="mt-4 flex flex-col gap-3 sm:flex-row md:mt-0">
+         <Button asChild variant="outline" size="xl" className="w-full md:w-auto">
+           <a href={MAPS_URL} target="_blank" rel="noopener noreferrer">
+             <MapPin className="size-4" /> Útvonaltervezés
+           </a>
+         </Button>
+         <Button asChild variant="beam" size="xl" className="w-full md:w-auto">
+           <a href={PHONE_TEL}>
+             <Phone /> Időpont: {PHONE_DISPLAY}
+           </a>
+         </Button>
+       </div>
+          
             <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="size-4 shrink-0 text-primary" /> Pétfürdő – Várpalota és környéke
             </p>
