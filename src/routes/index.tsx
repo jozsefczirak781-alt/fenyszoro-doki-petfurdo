@@ -268,15 +268,6 @@ function Index() {
          </Button>
        </div>
           
-            <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-              <MapPin className="size-4 shrink-0 text-primary" /> Pétfürdő – Várpalota és környéke
-            </p>
-          </div>
-          <Button asChild variant="beam" size="xl" className="mt-4 w-full md:mt-0 md:w-auto">
-            <a href={PHONE_TEL}>
-              <Phone /> Időpont: {PHONE_DISPLAY}
-            </a>
-          </Button>
         </div>
       </section>
     </main>
